@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../utils/date_time_extension.dart';
 
 import '../models/todo.dart';
 
@@ -21,9 +21,9 @@ class TodoListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            DateFormat('dd/MM/yyyy').format(todo.createdAt),
+            todo.createdAt.format('dd/MM/yyyy - EEEE', 'pt-BR').toUpperCase(),
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.w300,
               letterSpacing: .75,
             ),
