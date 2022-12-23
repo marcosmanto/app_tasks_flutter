@@ -26,7 +26,7 @@ class _TodoListPageState extends State<TodoListPage> {
         child: Scaffold(
           body: Center(
               child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -72,10 +72,12 @@ class _TodoListPageState extends State<TodoListPage> {
                     children: [for (String todo in todos) TodoListItem(todo)],
                   ),
                 ),
-                SizedBox(height: 16),
+                Divider(),
                 Row(
                   children: [
-                    Expanded(child: Text('Você possui 3 tarefas pendentes')),
+                    Expanded(
+                        child: Text(
+                            'Você possui ${todos.length} tarefas pendentes')),
                     SizedBox(width: 8),
                     ElevatedButton(
                         onPressed: () {},
