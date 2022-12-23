@@ -20,13 +20,27 @@ class TodoListItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            todo.createdAt.format('dd/MM/yyyy - EEEE', 'pt-BR').toUpperCase(),
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w300,
-              letterSpacing: .75,
-            ),
+          Row(
+            children: [
+              Icon(
+                Icons.calendar_today_outlined,
+                size: 12,
+                color: Colors.grey[600],
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                todo.createdAt
+                    .format('dd/MM/yyyy, HH:mm - EEEE', 'pt-BR')
+                    .toUpperCase(),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: .75,
+                ),
+              ),
+            ],
           ),
           Text(
             todo.title,
