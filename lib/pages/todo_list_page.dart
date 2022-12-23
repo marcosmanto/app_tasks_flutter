@@ -1,3 +1,4 @@
+import 'package:app_tasks_flutter/models/todo.dart';
 import 'package:app_tasks_flutter/utils/clear_focus.dart';
 import 'package:app_tasks_flutter/widgets/todo_list_item.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,17 @@ class TodoListPage extends StatefulWidget {
 class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController todoController = TextEditingController();
 
-  List<String> todos = [];
+  List<Todo> todos = [];
 
   void addTask() {
-    setState(() => todos.add(todoController.text));
+    setState(
+      () => todos.add(
+        Todo(
+          title: todoController.text,
+          createdAt: DateTime.now(),
+        ),
+      ),
+    );
     todoController.clear();
   }
 
@@ -69,7 +77,7 @@ class _TodoListPageState extends State<TodoListPage> {
                 Flexible(
                   child: ListView(
                     shrinkWrap: true,
-                    children: [for (String todo in todos) TodoListItem(todo)],
+                    children: [for (Todo todo in todos) TodoListItem(todo)],
                   ),
                 ),
                 Divider(),
