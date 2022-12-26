@@ -14,6 +14,8 @@ class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController todoController = TextEditingController();
 
   List<Todo> todos = [];
+  Todo? deletedTodo;
+  int? deletedTodoIndex;
 
   void addTask() {
     setState(
@@ -28,7 +30,39 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   void onDelete(Todo todo) {
+    deletedTodo = todo;
+    deletedTodoIndex = todos.indexOf(todo);
+
     setState(() => todos.remove(todo));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 10),
+        backgroundColor: Colors.white,
+        action: SnackBarAction(
+            label: 'Desfazer',
+            textColor: const Color(0xFF00d7f3),
+            onPressed: () =>
+                setState(() => todos.insert(deletedTodoIndex!, deletedTodo!))),
+        content: Row(
+          children: [
+            Icon(
+              Icons.check,
+              color: Colors.green,
+              size: 14,
+            ),
+            SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                'Tarefa "${todo.title}" foi removida com sucesso',
+                overflow: TextOverflow.fade,
+                style: TextStyle(color: Colors.black),
+                //maxLines: 3,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   @override
