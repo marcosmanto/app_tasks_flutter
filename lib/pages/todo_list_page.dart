@@ -52,6 +52,50 @@ class _TodoListPageState extends State<TodoListPage> {
     todoController.clear();
   }
 
+  void deleteAllTodos() {
+    setState(() => todos.clear());
+  }
+
+  void showDeleteTodosConfirmationDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text('Limpar tudo?'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text(
+                      'Você tem certeza que deseja apagar todas as tarefas?'),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Essa ação não poderá ser desfeita.',
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  )
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  style: TextButton.styleFrom(
+                    foregroundColor: Color(0xFF00D7F3),
+                  ),
+                  child: const Text('Cancelar'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    deleteAllTodos();
+                  },
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.red[600],
+                  ),
+                  child: const Text('Limpar tudo'),
+                ),
+              ],
+            ));
+  }
+
   void onDelete(Todo todo) {
     deletedTodo = todo;
     deletedTodoIndex = todos.indexOf(todo);
@@ -157,7 +201,7 @@ class _TodoListPageState extends State<TodoListPage> {
                             'Você possui ${todos.length} tarefas pendentes')),
                     SizedBox(width: 8),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: showDeleteTodosConfirmationDialog,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF00D7F3),
                           padding: EdgeInsets.symmetric(
