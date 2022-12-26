@@ -6,7 +6,8 @@ import '../models/todo.dart';
 
 class TodoListItem extends StatelessWidget {
   final Todo todo;
-  TodoListItem(this.todo, {super.key});
+  final void Function(Todo) onDelete;
+  TodoListItem(this.todo, {required this.onDelete, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class TodoListItem extends StatelessWidget {
               SlidableAction(
                 flex: 12,
                 spacing: 5,
-                onPressed: null,
+                onPressed: (_) => onDelete(todo),
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 backgroundColor: Color(0xFFFE4A49),
                 foregroundColor: Colors.white,

@@ -27,6 +27,10 @@ class _TodoListPageState extends State<TodoListPage> {
     todoController.clear();
   }
 
+  void onDelete(Todo todo) {
+    setState(() => todos.remove(todo));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,7 +81,13 @@ class _TodoListPageState extends State<TodoListPage> {
                 Flexible(
                   child: ListView(
                     shrinkWrap: true,
-                    children: [for (Todo todo in todos) TodoListItem(todo)],
+                    children: [
+                      for (Todo todo in todos)
+                        TodoListItem(
+                          todo,
+                          onDelete: onDelete,
+                        )
+                    ],
                   ),
                 ),
                 Divider(),
