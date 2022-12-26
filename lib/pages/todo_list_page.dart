@@ -18,6 +18,29 @@ class _TodoListPageState extends State<TodoListPage> {
   int? deletedTodoIndex;
 
   void addTask() {
+    if (todoController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red[600],
+          content: Row(
+            children: [
+              Icon(
+                Icons.error,
+                color: Colors.white,
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                'Você precisa adicionar um título à tarefa.',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      );
+      return;
+    }
+
     setState(
       () => todos.add(
         Todo(
@@ -48,11 +71,11 @@ class _TodoListPageState extends State<TodoListPage> {
         content: Row(
           children: [
             Icon(
-              Icons.check,
+              Icons.check_circle,
               color: Colors.green,
-              size: 14,
+              //size: 14,
             ),
-            SizedBox(width: 6),
+            SizedBox(width: 4),
             Expanded(
               child: Text(
                 'Tarefa "${todo.title}" foi removida com sucesso',
