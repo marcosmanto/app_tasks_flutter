@@ -34,6 +34,8 @@ class _TodoListPageState extends State<TodoListPage> {
     deletedTodoIndex = todos.indexOf(todo);
 
     setState(() => todos.remove(todo));
+
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: Duration(seconds: 10),
