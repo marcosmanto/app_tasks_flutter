@@ -173,6 +173,7 @@ class _TodoListPageState extends State<TodoListPage> {
                     children: [
                       Expanded(
                         child: TextField(
+                          onSubmitted: (_) => addTask(),
                           controller: todoController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
