@@ -3,16 +3,22 @@ import 'dart:io';
 import 'package:app_tasks_flutter/pages/todo_list_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:desktop_window/desktop_window.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 void main() async {
-  if (!kIsWeb && Platform.isWindows) {
-    WidgetsFlutterBinding.ensureInitialized();
-    await DesktopWindow.setWindowSize(Size(495, 730));
-    await DesktopWindow.setMinWindowSize(Size(495, 730));
-    await DesktopWindow.setMaxWindowSize(Size(730, 880));
-  }
   runApp(MyApp());
+
+  if (!kIsWeb && Platform.isWindows) {
+    doWhenWindowReady(() {
+      const initialSize = Size(495, 730); //495 × 730 731 × 883
+      appWindow.minSize = initialSize;
+      appWindow.size = initialSize;
+      appWindow.maxSize = Size(730, 890);
+      appWindow.alignment = Alignment.center;
+      appWindow.title = 'Task App';
+      appWindow.show();
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +27,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TodoListPage(),
+      home: Stack(
+        children: [
+          TodoListPage(),
+          if (!kIsWeb && Platform.isWindows)
+            Column(
+              children: [
+                WindowTitleBarBox(
+                  child: Row(
+                    children: [
+                      Expanded(child: MoveWindow()),
+                      const WindowButtons(),
+                    ],
+                  ),
+                )
+              ],
+            ),
+        ],
+      ),
     );
+  }
+}
+
+var buttonColors = WindowButtonColors(
+  mouseOver: Color(0xFF00D7F3),
+  mouseDown: Color(0xFFDE318D),
+);
+
+class WindowButtons extends StatelessWidget {
+  const WindowButtons({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      MinimizeWindowButton(colors: buttonColors),
+      CloseWindowButton(),
+    ]);
   }
 }
