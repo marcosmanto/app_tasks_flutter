@@ -13,6 +13,7 @@ dependencies:
   intl: ^0.18.0
   flutter_slidable: ^2.0.0
   shared_preferences: ^2.0.15
+  desktop_window: ^0.4.0
 
 dev_dependencies:
   flutter_test:
