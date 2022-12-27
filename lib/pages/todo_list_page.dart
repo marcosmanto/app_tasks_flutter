@@ -1,4 +1,5 @@
 import 'package:app_tasks_flutter/models/todo.dart';
+import 'package:app_tasks_flutter/repositories/todo_repository.dart';
 import 'package:app_tasks_flutter/utils/clear_focus.dart';
 import 'package:app_tasks_flutter/widgets/todo_list_item.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class TodoListPage extends StatefulWidget {
 
 class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController todoController = TextEditingController();
+  final TodoRepository todoRepository = TodoRepository();
 
   List<Todo> todos = [];
   Todo? deletedTodo;
@@ -50,6 +52,7 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
     );
     todoController.clear();
+    todoRepository.saveTodoList(todos);
   }
 
   void deleteAllTodos() {
