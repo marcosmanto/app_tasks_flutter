@@ -67,6 +67,7 @@ class _TodoListPageState extends State<TodoListPage> {
 
   void deleteAllTodos() {
     setState(() => todos.clear());
+    todoRepository.saveTodoList(todos);
   }
 
   void showDeleteTodosConfirmationDialog() {
@@ -115,16 +116,21 @@ class _TodoListPageState extends State<TodoListPage> {
 
     setState(() => todos.remove(todo));
 
+    todoRepository.saveTodoList(todos);
+
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: Duration(seconds: 10),
         backgroundColor: Colors.white,
         action: SnackBarAction(
-            label: 'Desfazer',
-            textColor: const Color(0xFF00d7f3),
-            onPressed: () =>
-                setState(() => todos.insert(deletedTodoIndex!, deletedTodo!))),
+          label: 'Desfazer',
+          textColor: const Color(0xFF00d7f3),
+          onPressed: () {
+            setState(() => todos.insert(deletedTodoIndex!, deletedTodo!));
+            todoRepository.saveTodoList(todos);
+          },
+        ),
         content: Row(
           children: [
             Icon(
