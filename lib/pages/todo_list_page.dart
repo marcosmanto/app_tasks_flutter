@@ -4,6 +4,8 @@ import 'package:app_tasks_flutter/utils/clear_focus.dart';
 import 'package:app_tasks_flutter/widgets/todo_list_item.dart';
 import 'package:flutter/material.dart';
 
+const primaryColor = Color(0xFF00D7F3);
+
 class TodoListPage extends StatefulWidget {
   TodoListPage({super.key});
 
@@ -92,7 +94,7 @@ class _TodoListPageState extends State<TodoListPage> {
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
                   style: TextButton.styleFrom(
-                    foregroundColor: Color(0xFF00D7F3),
+                    foregroundColor: primaryColor,
                   ),
                   child: const Text('Cancelar'),
                 ),
@@ -125,7 +127,7 @@ class _TodoListPageState extends State<TodoListPage> {
         backgroundColor: Colors.white,
         action: SnackBarAction(
           label: 'Desfazer',
-          textColor: const Color(0xFF00d7f3),
+          textColor: primaryColor,
           onPressed: () {
             setState(() => todos.insert(deletedTodoIndex!, deletedTodo!));
             todoRepository.saveTodoList(todos);
@@ -175,12 +177,11 @@ class _TodoListPageState extends State<TodoListPage> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Adicione uma tarefa',
-                            floatingLabelStyle:
-                                TextStyle(color: Color(0xFF00D7F3)),
+                            floatingLabelStyle: TextStyle(color: primaryColor),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 2,
-                                color: Color(0xFF00D7F3),
+                                color: primaryColor,
                               ),
                             ),
                           ),
@@ -190,7 +191,7 @@ class _TodoListPageState extends State<TodoListPage> {
                       ElevatedButton(
                           onPressed: addTask,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF00D7F3),
+                            backgroundColor: primaryColor,
                           ),
                           child: Icon(
                             Icons.add,
@@ -222,7 +223,7 @@ class _TodoListPageState extends State<TodoListPage> {
                     ElevatedButton(
                         onPressed: showDeleteTodosConfirmationDialog,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF00D7F3),
+                          backgroundColor: primaryColor,
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
                         ),
