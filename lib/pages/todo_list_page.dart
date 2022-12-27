@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 const primaryColor = Color(0xFF00D7F3);
 
 class TodoListPage extends StatefulWidget {
-  TodoListPage({super.key});
+  const TodoListPage({super.key});
 
   @override
   State<TodoListPage> createState() => _TodoListPageState();
@@ -36,13 +36,13 @@ class _TodoListPageState extends State<TodoListPage> {
         SnackBar(
           backgroundColor: Colors.red[600],
           content: Row(
-            children: [
+            children: const [
               Icon(
                 Icons.error,
                 color: Colors.white,
               ),
-              const SizedBox(width: 4),
-              const Text(
+              SizedBox(width: 4),
+              Text(
                 'Você precisa adicionar um título à tarefa.',
                 style: TextStyle(color: Colors.white),
               ),
@@ -80,11 +80,10 @@ class _TodoListPageState extends State<TodoListPage> {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                      'Você tem certeza que deseja apagar todas as tarefas?'),
-                  const SizedBox(height: 10),
-                  const Text(
+                children: const [
+                  Text('Você tem certeza que deseja apagar todas as tarefas?'),
+                  SizedBox(height: 10),
+                  Text(
                     'Essa ação não poderá ser desfeita.',
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   )
@@ -123,7 +122,7 @@ class _TodoListPageState extends State<TodoListPage> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 10),
+        duration: const Duration(seconds: 10),
         backgroundColor: Colors.white,
         action: SnackBarAction(
           label: 'Desfazer',
@@ -135,17 +134,17 @@ class _TodoListPageState extends State<TodoListPage> {
         ),
         content: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.check_circle,
               color: Colors.green,
               //size: 14,
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Expanded(
               child: Text(
                 'Tarefa "${todo.title}" foi removida com sucesso',
                 overflow: TextOverflow.fade,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 //maxLines: 3,
               ),
             )
@@ -175,7 +174,7 @@ class _TodoListPageState extends State<TodoListPage> {
                         child: TextField(
                           onSubmitted: (_) => addTask(),
                           controller: todoController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Adicione uma tarefa',
                             floatingLabelStyle: TextStyle(color: primaryColor),
@@ -188,20 +187,20 @@ class _TodoListPageState extends State<TodoListPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       ElevatedButton(
                           onPressed: addTask,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: primaryColor,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.add,
                             size: 30,
                           ))
                     ],
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Flexible(
                   child: ListView(
                     shrinkWrap: true,
@@ -214,22 +213,22 @@ class _TodoListPageState extends State<TodoListPage> {
                     ],
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Row(
                   children: [
                     Expanded(
                         child: Text(
                             'Você possui ${todos.length} tarefas pendentes')),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     if (todos.isNotEmpty)
                       ElevatedButton(
                           onPressed: showDeleteTodosConfirmationDialog,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: primaryColor,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                           ),
-                          child: Text('Limpar tudo'))
+                          child: const Text('Limpar tudo'))
                   ],
                 ),
               ],

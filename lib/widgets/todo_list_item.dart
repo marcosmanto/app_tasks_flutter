@@ -8,7 +8,7 @@ import '../models/todo.dart';
 class TodoListItem extends StatefulWidget {
   final Todo todo;
   final void Function(Todo) onDelete;
-  TodoListItem(this.todo, {required this.onDelete, super.key});
+  const TodoListItem(this.todo, {required this.onDelete, super.key});
 
   @override
   State<TodoListItem> createState() => _TodoListItemState();
@@ -26,10 +26,10 @@ class _TodoListItemState extends State<TodoListItem> {
             key: const ValueKey(0),
             endActionPane: ActionPane(
               extentRatio: .3,
-              motion: ScrollMotion(),
+              motion: const ScrollMotion(),
               children: [
                 // A SlidableAction can have an icon and/or a label.
-                SlidableAction(
+                const SlidableAction(
                   onPressed: null,
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.transparent,
@@ -40,8 +40,8 @@ class _TodoListItemState extends State<TodoListItem> {
                   flex: 12,
                   spacing: 5,
                   onPressed: (_) => widget.onDelete(widget.todo),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  backgroundColor: Color(0xFFFE4A49),
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  backgroundColor: const Color(0xFFFE4A49),
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: 'Excluir',
@@ -66,14 +66,14 @@ class _TodoListItemState extends State<TodoListItem> {
                         size: 12,
                         color: Colors.grey[600],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       Text(
                         widget.todo.createdAt
                             .format('dd/MM/yyyy, HH:mm - EEEE', 'pt-BR')
                             .toUpperCase(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
                           letterSpacing: .75,
@@ -85,7 +85,7 @@ class _TodoListItemState extends State<TodoListItem> {
                     padding: const EdgeInsets.only(top: 8.0, bottom: 6),
                     child: Text(
                       widget.todo.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -125,14 +125,14 @@ class _TodoListItemState extends State<TodoListItem> {
                                 size: 12,
                                 color: Colors.grey[600],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 4,
                               ),
                               Text(
                                 widget.todo.createdAt
                                     .format('dd/MM/yyyy, HH:mm - EEEE', 'pt-BR')
                                     .toUpperCase(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w300,
                                   letterSpacing: .75,
@@ -144,7 +144,7 @@ class _TodoListItemState extends State<TodoListItem> {
                             padding: const EdgeInsets.only(top: 8.0, bottom: 6),
                             child: Text(
                               widget.todo.title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -154,25 +154,25 @@ class _TodoListItemState extends State<TodoListItem> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 6),
+                  const SizedBox(width: 6),
                   if (isHover)
                     InkWell(
                       onTap: () => widget.onDelete(widget.todo),
                       child: Container(
                         width: 75,
                         height: 50,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.red,
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.delete,
                                 color: Colors.white,
                               ),
-                              const Text('Excluir',
+                              Text('Excluir',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700))

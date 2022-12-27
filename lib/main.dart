@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 void main() async {
-  runApp(MyApp());
+  runApp(const MyApp());
 
   if (!kIsWeb && Platform.isWindows) {
     doWhenWindowReady(() {
       const initialSize = Size(495, 730); //495 × 730 731 × 883
       appWindow.minSize = initialSize;
       appWindow.size = initialSize;
-      appWindow.maxSize = Size(730, 890);
+      appWindow.maxSize = const Size(730, 890);
       appWindow.alignment = Alignment.center;
       appWindow.title = 'Task App';
       appWindow.show();
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Stack(
         children: [
-          TodoListPage(),
+          const TodoListPage(),
           if (!kIsWeb && Platform.isWindows)
             Column(
               children: [
@@ -50,8 +50,8 @@ class MyApp extends StatelessWidget {
 }
 
 var buttonColors = WindowButtonColors(
-  mouseOver: Color(0xFF00D7F3),
-  mouseDown: Color(0xFFDE318D),
+  mouseOver: const Color(0xFF00D7F3),
+  mouseDown: const Color(0xFFDE318D),
 );
 
 class WindowButtons extends StatelessWidget {
