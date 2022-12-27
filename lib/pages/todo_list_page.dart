@@ -19,6 +19,14 @@ class _TodoListPageState extends State<TodoListPage> {
   Todo? deletedTodo;
   int? deletedTodoIndex;
 
+  @override
+  void initState() {
+    super.initState();
+    todoRepository
+        .getTodoList()
+        .then((savedTodos) => setState(() => todos = savedTodos));
+  }
+
   void addTask() {
     if (todoController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -44,12 +52,14 @@ class _TodoListPageState extends State<TodoListPage> {
     }
 
     setState(
-      () => todos.add(
-        Todo(
-          title: todoController.text,
-          createdAt: DateTime.now(),
-        ),
-      ),
+      () => todos = todos
+        ..add(
+          Todo(
+            title: todoController.text,
+            createdAt: DateTime.now(),
+          ),
+        )
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt)),
     );
     todoController.clear();
     todoRepository.saveTodoList(todos);

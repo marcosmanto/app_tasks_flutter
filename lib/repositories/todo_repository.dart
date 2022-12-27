@@ -13,7 +13,6 @@ class TodoRepository {
     sharedPreferences = await SharedPreferences.getInstance();
     final String jsonString = sharedPreferences.getString(todoListKey) ?? '[]';
     final List jsonDecoded = json.decode(jsonString) as List;
-    print(jsonDecoded);
     return jsonDecoded.map((e) => Todo.fromJson(e)).toList();
   }
 
