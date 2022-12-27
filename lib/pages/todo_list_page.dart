@@ -221,14 +221,15 @@ class _TodoListPageState extends State<TodoListPage> {
                         child: Text(
                             'Você possui ${todos.length} tarefas pendentes')),
                     SizedBox(width: 8),
-                    ElevatedButton(
-                        onPressed: showDeleteTodosConfirmationDialog,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                        ),
-                        child: Text('Limpar tudo'))
+                    if (todos.isNotEmpty)
+                      ElevatedButton(
+                          onPressed: showDeleteTodosConfirmationDialog,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                          ),
+                          child: Text('Limpar tudo'))
                   ],
                 ),
               ],
